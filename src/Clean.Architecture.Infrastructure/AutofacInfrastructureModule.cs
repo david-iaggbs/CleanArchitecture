@@ -52,6 +52,11 @@ public class AutofacInfrastructureModule : Module
   protected override void Load(ContainerBuilder builder)
   {
     LoadAssemblies();
+
+    RegisterEF(builder);
+    // RegisterQueries(builder);
+    RegisterMediatR(builder);
+
     if (_isDevelopment)
     {
       RegisterDevelopmentOnlyDependencies(builder);
@@ -60,9 +65,6 @@ public class AutofacInfrastructureModule : Module
     {
       RegisterProductionOnlyDependencies(builder);
     }
-    RegisterEF(builder);
-    RegisterQueries(builder);
-    RegisterMediatR(builder);
   }
 
   private void RegisterEF(ContainerBuilder builder)
@@ -73,12 +75,12 @@ public class AutofacInfrastructureModule : Module
       .InstancePerLifetimeScope();
   }
 
-  private void RegisterQueries(ContainerBuilder builder)
-  {
-    builder.RegisterType<ListContributorsQueryService>()
-      .As<IListContributorsQueryService>()
-      .InstancePerLifetimeScope();
-  }
+  // private void RegisterQueries(ContainerBuilder builder)
+  // {
+  //   builder.RegisterType<ListContributorsQueryService>()
+  //     .As<IListContributorsQueryService>()
+  //     .InstancePerLifetimeScope();
+  // }
 
   private void RegisterMediatR(ContainerBuilder builder)
   {
@@ -120,15 +122,19 @@ public class AutofacInfrastructureModule : Module
     builder.RegisterType<FakeEmailSender>().As<IEmailSender>()
       .InstancePerLifetimeScope();
 
-    //builder.RegisterType<FakeListContributorsQueryService>()
-    //  .As<IListContributorsQueryService>()
-    //  .InstancePerLifetimeScope();
+    builder.RegisterType<FakeListContributorsQueryService>()
+     .As<IListContributorsQueryService>()
+     .InstancePerLifetimeScope();
   }
 
   private void RegisterProductionOnlyDependencies(ContainerBuilder builder)
   {
     // NOTE: Add any production only (real) services here
     builder.RegisterType<SmtpEmailSender>().As<IEmailSender>()
+      .InstancePerLifetimeScope();
+
+      builder.RegisterType<ListContributorsQueryService>()
+      .As<IListContributorsQueryService>()
       .InstancePerLifetimeScope();
   }
 }
