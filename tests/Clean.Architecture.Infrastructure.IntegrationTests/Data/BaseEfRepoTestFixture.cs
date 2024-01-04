@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Clean.Architecture.Core.ContributorAggregate;
 using NSubstitute;
 
-namespace Clean.Architecture.IntegrationTests.Data;
+namespace Clean.Architecture.Infrastructure.IntegrationTests.Data;
 
 public abstract class BaseEfRepoTestFixture
 {

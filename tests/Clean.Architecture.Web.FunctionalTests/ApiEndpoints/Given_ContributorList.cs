@@ -3,15 +3,15 @@ using Clean.Architecture.Infrastructure.Data;
 using Clean.Architecture.Web.Endpoints.ContributorEndpoints;
 using Xunit;
 
-namespace Clean.Architecture.FunctionalTests.ApiEndpoints;
+namespace Clean.Architecture.Web.FunctionalTests.ApiEndpoints;
 
 [Collection("Sequential")]
-public class ContributorList(CustomWebApplicationFactory<Program> factory) : IClassFixture<CustomWebApplicationFactory<Program>>
+public class Given_ContributorList(CustomWebApplicationFactory<Program> factory) : IClassFixture<CustomWebApplicationFactory<Program>>
 {
   private readonly HttpClient _client = factory.CreateClient();
 
   [Fact]
-  public async Task ReturnsTwoContributors()
+  public async Task When_TwoContributors_Then_ReturnsTwoContributors()
   {
     var result = await _client.GetAndDeserializeAsync<ContributorListResponse>("/Contributors");
 

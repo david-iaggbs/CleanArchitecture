@@ -4,15 +4,15 @@ using Clean.Architecture.Web.ContributorEndpoints;
 using Clean.Architecture.Web.Endpoints.ContributorEndpoints;
 using Xunit;
 
-namespace Clean.Architecture.FunctionalTests.ApiEndpoints;
+namespace Clean.Architecture.Web.FunctionalTests.ApiEndpoints;
 
 [Collection("Sequential")]
-public class ContributorGetById(CustomWebApplicationFactory<Program> factory) : IClassFixture<CustomWebApplicationFactory<Program>>
+public class Given_ContributorGetById(CustomWebApplicationFactory<Program> factory) : IClassFixture<CustomWebApplicationFactory<Program>>
 {
   private readonly HttpClient _client = factory.CreateClient();
 
   [Fact]
-  public async Task ReturnsSeedContributorGivenId1()
+  public async Task When_Id1_Then_ReturnsSeedContributor()
   {
     var result = await _client.GetAndDeserializeAsync<ContributorRecord>(GetContributorByIdRequest.BuildRoute(1));
 
@@ -21,7 +21,7 @@ public class ContributorGetById(CustomWebApplicationFactory<Program> factory) : 
   }
 
   [Fact]
-  public async Task ReturnsNotFoundGivenId1000()
+  public async Task When_Id1000_Then_ReturnsNotFound()
   {
     string route = GetContributorByIdRequest.BuildRoute(1000);
     _ = await _client.GetAndEnsureNotFoundAsync(route);

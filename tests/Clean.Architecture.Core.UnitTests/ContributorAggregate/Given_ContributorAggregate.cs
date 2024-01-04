@@ -1,9 +1,9 @@
 ﻿using Clean.Architecture.Core.ContributorAggregate;
 using Xunit;
 
-namespace Clean.Architecture.UnitTests.Core.ContributorAggregate;
+namespace Clean.Architecture.UnitTests.Core.Given_ContributorAggregate;
 
-public class ContributorConstructor
+public class Given_ContributorAggregate
 {
   private readonly string _testName = "test name";
   private Contributor? _testContributor;
@@ -14,7 +14,7 @@ public class ContributorConstructor
   }
 
   [Fact]
-  public void InitializesName()
+  public void When_ValidName_Then_InitializeSuccessfully()
   {
     _testContributor = CreateContributor();
 

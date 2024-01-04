@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Clean.Architecture.UnitTests.Core.Services;
 
-public class DeleteContributorService_DeleteContributor
+public class Given_DeleteContributorService
 {
   private readonly IRepository<Contributor> _repository = Substitute.For<IRepository<Contributor>>();
   private readonly IMediator _mediator = Substitute.For<IMediator>();
@@ -16,13 +16,13 @@ public class DeleteContributorService_DeleteContributor
 
   private readonly DeleteContributorService _service;
 
-  public DeleteContributorService_DeleteContributor()
+  public Given_DeleteContributorService()
   {
     _service = new DeleteContributorService(_repository, _mediator, _logger);
   }
 
   [Fact]
-  public async Task ReturnsNotFoundGivenCantFindContributor()
+  public async Task When_CantFindContributor_Then_ReturnsNotFound()
   {
     var result = await _service.DeleteContributor(0);
 
